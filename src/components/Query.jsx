@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Query = () => {
     const [world, setWorld] = useState({
         name : "",
@@ -9,11 +9,12 @@ const Query = () => {
     });
     const [obj, setObj] = useState([]);
     const { attr, id } = useParams();
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get(`https://swapi.dev/api/${attr}/${id}`)
             .then(response => setObj(response.data))
-            .catch(error => setObj({name: "Could not find :("}))
-    }, [attr, id]);
+            .catch(error => navigate("/*"))
+    }, [attr, id, navigate]);
 
     const getHomeWorld = ((link) => {
         axios.get(link).then(response => setWorld({
