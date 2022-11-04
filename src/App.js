@@ -58,7 +58,6 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/:attr/:id" element={<Query />} />
           <Route path="*" element={<Error/>} />
-          <Route/>
         </Routes>
       </div>
   );
